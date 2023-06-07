@@ -1,7 +1,7 @@
 spring-boot-rest-api:
   image:
     repository: timpamungkas/devops-blue
-    tag: 1.0.0
+    tag: 1.0.1
 
   autoscaling:
     enabled: false
