@@ -1,45 +1,10 @@
-spring-boot-rest-api:
-  image:
-    repository: timpamungkas/devops-blue
-    tag: 1.0.1
-
-  autoscaling:
-    enabled: false
-    targetCPUUtilizationPercentage: ""
-    targetMemoryUtilizationPercentage: ""
-
-  ingress:
-    annotations:
-      nginx.ingress.kubernetes.io/limit-rpm: "10"
-      nginx.ingress.kubernetes.io/limit-burst-multiplier: "1"
-    hosts:
-      - host: api.test.local
-        paths:
-          - path: /devops/blue
-            pathType: Prefix
-
-  extraEnv: |
-    - name: DEVOPS_BLUE_HTML_BG_COLOR
-      value: "#dcecf2"
-    - name: DEVOPS_BLUE_HTML_TEXT_COLOR
-      value: "#000000"
-    - name: HARDCODED_ENVIRONMENT_VARIABLE
-      value: This is from values-dev.yml
-    - name: DEVOPS_BLUE_HTML_TEXT_ONE
-      valueFrom:
-        secretKeyRef:
-            name: devops-secret-blue
-            key: devops-blue-html-text-one
-    - name: DEVOPS_BLUE_HTML_TEXT_TWO
-      valueFrom:
-        secretKeyRef:
-            name: devops-secret-blue
-            key: devops-blue-html-text-two
-    - name: DEVOPS_BLUE_HTML_TEXT_THREE
-      value: This is from values-dev.yml
-    - name: DEVOPS_BLUE_HTML_TEXT_FOUR
-      value: This is from values-dev.yml
-    - name: DEVOPS_BLUE_HTML_TEXT_FIVE
-      value: This is from values-dev.yml
-    - name: DEVOPS_BLUE_HTML_TEXT_SIX
-      value: This is from values-dev.yml
+sealed-secret:
+    namespace: devops
+    sealedSecrets:
+    - name: devops-secret-blue
+      annotations:
+      - sealedsecrets.bitnami.com/namespace-wide: "true"
+      type: Opaque
+      values:
+        devops-blue-html-text-one: AgBDa6nDCIV/q40l9ThZW1BZ1rEMQQ9t9ou46xJEmozYYG1YQe6mLIFm0amVHWoNYg42lKkchpxnVWX4fsruq60C29KC8iMF8BCKaH7vuUD0+6Ggn9mLgYuKE6u3AWKNiit9YKhEUz7fDLnOBBTe5zG84VeaxB8KuS0uTjA4g/uAUurhw9mArpBFt4LJ3vRKkq319ta5MX3uNoAmdqDCLRnmQ24jAyHvLhGu/jAMA5+J6em7HfpHhCaOOU2YHFQtiY5Wtx270g/DdN3n9k54Uu2N0w+bmkMLwxIOq+D8znHRkNDF9hCfIKpur1x1P8Oo2QkuIoRnCk2O/YChQTpQ4ZswSVGW+4bpMvAiLkdAb6b+ZVX/JYYHoFUl/yn6xJXiFkxM8isetce+x+ERJZZVLfiidIazqgO91qbErjKqnxDR9riVgTli9b9i9W0mpnicdM/nrakNf+IT5wir8gbFNdYf/nyQjTdOP1kYFM9WYFgRQP5tobAjh0X6iGevQ2bTXzI6uaJJNDZrWEuKYRUkZK+SgxL3SY419Tx+gNtzNUHr1pHw/X/+i/gHFN3ArtzCAXMZfMWWlW7lqGbDTMizfhO9BtvHSTDddFAculkXmBmvg6icZK+BSTYZX7P0KLL/hzUh0HFDd20+1+gawI9IQrKZat/tAp4TS6bHjLqQ7DwB5pAVjI9BJTtFuZ3WW89UotaWfrTjCQV+27UGNTLFTMM6eQCoHp2nd8kxMnij5A==
+        devops-blue-html-text-two: AgCCgl3lyFIvBK1uhfJNs94gh63hZKNgz6CE4OtpxGQr9litNmkDCqXAf2dSk5ZxzToU/6Tp7PYRBVoA50USwiIzjHzaCnHCngLaCDySAmZ56Dmyb+tAYLGWY/9IU1HctLQHuRhoq53tBOBNQYNjeGxgCDaDoog98uAscGg64LrsKRhuwrkWGQjNPUjyHqCobTNVfkDQTBmHlYkVZgWhNozCKN9JB1Uz5o3uizaNiacFJTJ/0Ybv+gMonothTLeBlyzJTlPlc0HBE9dTByL8lOu2pvWbXunWQUr3H1oV4bVzwlIdqCtvfKn11j8NxjSKxhEEmUnT3kIwoYEZ3zjyEIrel4Y8CetlftADDR6kKKU/Xo9XFGWHXCb+m7hAlO9b7jny6lP6E4h5kAsmXCZlgU2VE0NLw17p7L8SsW0VyeWy7BXJ8khJ5m+mvsOlrnwX3al4z3JkpvXumVQh7WYHfLYftSUrpZjURUWDOhd1JXbGNC7Oc8kiCuJ4eWtAziKEzRNaqV1jMhlCcHPqt2cs1KbvrcfFB3UobxSwaoqgdynTmskKF2irp5lwHXnsxCKiID2G2KwzXoJBQDiNREbAUZeXYHosA7xv0FKxQNws0kC0/ELnJZ6NAh6RmgQpWhl5sJzu7/exP1WuW3Fcd8vhUaJlkGupUmIcVjxUlViLXcBy8izMqJabdK+ippFjE8iyaxGxQIKp/lFrAJCAbkE6hcHs5bHsOKpGuYHvvwt715/pRyO6OCpSkzYvoa+2RXe/52fNjpY=
