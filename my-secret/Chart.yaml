@@ -1,0 +1,9 @@
+apiVersion: v2
+name: my-secret-chart
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+dependencies:
+  - name: sealed-secret
+    version: 0.1.0
+    repository: https://ibmkuyucu.github.io/devops-helm-charts/
